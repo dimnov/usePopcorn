@@ -1,6 +1,11 @@
 import { useState } from "react";
 import Navigation from "./components/Navigation/index.jsx";
 import Main from "./components/Main/index.jsx";
+import Search from "./components/Navigation/Search.jsx";
+import NumResults from "./components/Navigation/NumResults.jsx";
+import WatchedBox from "./components/Main/WatchedBox/index.jsx";
+import ListBox from "./components/Main/ListBox/index.jsx";
+import MovieList from "./components/Main/ListBox/MovieList.jsx";
 
 const tempMovieData = [
  {
@@ -50,10 +55,23 @@ const tempWatchedData = [
 ];
 
 export default function App() {
+ const [query, setQuery] = useState("");
+ const [movies, setMovies] = useState(tempMovieData);
+ const moviesNum = movies.length;
+
  return (
   <>
-   <Navigation />
-   <Main tempMovieData={tempMovieData} tempWatchedData={tempWatchedData} />
+   <Navigation>
+    <Search query={query} />
+    <NumResults moviesNum={moviesNum} />
+   </Navigation>
+
+   <Main>
+    <ListBox>
+     <MovieList movies={movies} />
+    </ListBox>
+    <WatchedBox tempWatchedData={tempWatchedData} />
+   </Main>
   </>
  );
 }
