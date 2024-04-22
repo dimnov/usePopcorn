@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Search from "./Search.jsx";
 import Logo from "./Logo.jsx";
-import Result from "./Result.jsx";
+import NumResults from "./NumResults.jsx";
 
 function Navigation() {
  const [query, setQuery] = useState("");
@@ -10,7 +10,7 @@ function Navigation() {
   <nav className="nav-bar">
    <Logo />
    <Search query={query} />
-   <Result />
+   <NumResults />
   </nav>
  );
 }

@@ -1,4 +1,4 @@
-function Result() {
+function NumResults() {
  return (
   <p className="num-results">
    Found <strong>blabla</strong> results
@@ -6,4 +6,4 @@ function Result() {
  );
 }
 
-export default Result;
+export default NumResults;
