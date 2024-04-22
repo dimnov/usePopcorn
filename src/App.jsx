@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navigation from "./components/Navigation/index.jsx";
-import ListBox from "./components/ListBox.jsx";
+import Main from "./components/Main/index.jsx";
 
 const tempMovieData = [
  {
@@ -53,7 +53,7 @@ export default function App() {
  return (
   <>
    <Navigation />
-   <ListBox tempMovieData={tempMovieData} tempWatchedData={tempWatchedData} />
+   <Main tempMovieData={tempMovieData} tempWatchedData={tempWatchedData} />
   </>
  );
 }
