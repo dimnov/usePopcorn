@@ -3,9 +3,10 @@ import Navigation from "./components/Navigation/index.jsx";
 import Main from "./components/Main/index.jsx";
 import Search from "./components/Navigation/Search.jsx";
 import NumResults from "./components/Navigation/NumResults.jsx";
-import WatchedBox from "./components/Main/WatchedBox/index.jsx";
-import ListBox from "./components/Main/ListBox/index.jsx";
-import MovieList from "./components/Main/ListBox/MovieList.jsx";
+import Box from "./components/Main/Box.jsx";
+import MovieList from "./components/Main/Movie/MovieList.jsx";
+import Summary from "./components/Main/WatchedMovie/Summary.jsx";
+import WatchedMoviesList from "./components/Main/WatchedMovie/WatchedMoviesList.jsx";
 
 const tempMovieData = [
  {
@@ -56,6 +57,7 @@ const tempWatchedData = [
 
 export default function App() {
  const [query, setQuery] = useState("");
+ const [watched, setWatched] = useState(tempWatchedData);
  const [movies, setMovies] = useState(tempMovieData);
  const moviesNum = movies.length;
 
@@ -67,10 +69,14 @@ export default function App() {
    </Navigation>
 
    <Main>
-    <ListBox>
+    <Box>
      <MovieList movies={movies} />
-    </ListBox>
-    <WatchedBox tempWatchedData={tempWatchedData} />
+    </Box>
+
+    <Box>
+     <Summary watched={watched} />
+     <WatchedMoviesList watched={watched} />
+    </Box>
    </Main>
   </>
  );
