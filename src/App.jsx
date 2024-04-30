@@ -8,6 +8,7 @@ import MovieList from "./components/Main/Movie/MovieList.jsx";
 import WatchedSummary from "./components/Main/WatchedMovie/WatchedSummary.jsx";
 import WatchedMoviesList from "./components/Main/WatchedMovie/WatchedMoviesList.jsx";
 import Loader from "./components/Main/Loader.jsx";
+import MovieDetails from "./components/Main/Movie/MovieDetails.jsx";
 
 const tempMovieData = [
   {
@@ -60,12 +61,24 @@ const KEY = "9b2da33c";
 
 export default function App() {
   const [query, setQuery] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
+
   const [watched, setWatched] = useState(tempWatchedData);
   const [movies, setMovies] = useState(tempMovieData);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+
   const moviesNum = movies?.length;
   const URL = `http://www.omdbapi.com/?apiKey=${KEY}&s=${query}`;
+
+  function handleMovieSelect(movieId) {
+    setSelectedId(movieId === selectedId ? null : movieId);
+  }
+
+  function onClose() {
+    setSelectedId(null);
+  }
 
   useEffect(() => {
     async function fetchMovies() {
@@ -108,7 +121,13 @@ export default function App() {
       </Navigation>
 
       <Main>
-        <Box>{isLoading ? <Loader error={error} /> : <MovieList movies={movies} />}</Box>
+        <Box>
+          {isLoading ? (
+            <Loader error={error} />
+          ) : (
+            <MovieList handleMovieSelect={handleMovieSelect} movies={movies} />
+          )}
+        </Box>
 
         <Box>
           {selectedId ? (

@@ -1,13 +1,13 @@
 import Movie from "./Movie.jsx";
 
-function MovieList({ movies }) {
- return (
-  <ul className="list">
-   {movies?.map((movie) => (
-    <Movie movie={movie} key={movie.imdbId} />
-   ))}
-  </ul>
- );
+function MovieList({ movies, handleMovieSelect }) {
+  return (
+    <ul className="list list-movies">
+      {movies?.map((movie) => (
+        <Movie handleMovieSelect={handleMovieSelect} movie={movie} key={movie.imdbId} />
+      ))}
+    </ul>
+  );
 }
 
 export default MovieList;
