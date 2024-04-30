@@ -7,6 +7,7 @@ import Box from "./components/Main/Box.jsx";
 import MovieList from "./components/Main/Movie/MovieList.jsx";
 import Summary from "./components/Main/WatchedMovie/Summary.jsx";
 import WatchedMoviesList from "./components/Main/WatchedMovie/WatchedMoviesList.jsx";
+import Loader from "./components/Main/Loader.jsx";
 
 const tempMovieData = [
  {
@@ -70,7 +71,7 @@ export default function App() {
 
    <Main>
     <Box>
-     <MovieList movies={movies} />
+     {isLoading ? <Loader error={error} /> : <MovieList movies={movies} />}
     </Box>
 
     <Box>
