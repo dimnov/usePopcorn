@@ -70,7 +70,6 @@ export default function App() {
   const [error, setError] = useState(false);
 
   const moviesNum = movies?.length;
-  const URL = `http://www.omdbapi.com/?apiKey=${KEY}&s=${query}`;
 
   function handleMovieSelect(movieId) {
     setSelectedId(movieId === selectedId ? null : movieId);
@@ -84,7 +83,7 @@ export default function App() {
     async function fetchMovies() {
       try {
         setIsLoading(true);
-        const res = await fetch(URL);
+        const res = await fetch(`http://www.omdbapi.com/?apiKey=${KEY}&s=${query}`);
 
         if (!res.ok) throw new Error("No internet connection");
 
@@ -131,7 +130,7 @@ export default function App() {
 
         <Box>
           {selectedId ? (
-            <MovieDetails selectedId={selectedId} onClose={onClose} />
+            <MovieDetails KEY={KEY} selectedId={selectedId} onClose={onClose} />
           ) : (
             <>
               <WatchedSummary watched={watched} />
