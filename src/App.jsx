@@ -5,7 +5,7 @@ import Search from "./components/Navigation/Search.jsx";
 import NumResults from "./components/Navigation/NumResults.jsx";
 import Box from "./components/Main/Box.jsx";
 import MovieList from "./components/Main/Movie/MovieList.jsx";
-import Summary from "./components/Main/WatchedMovie/Summary.jsx";
+import WatchedSummary from "./components/Main/WatchedMovie/WatchedSummary.jsx";
 import WatchedMoviesList from "./components/Main/WatchedMovie/WatchedMoviesList.jsx";
 import Loader from "./components/Main/Loader.jsx";
 
@@ -111,8 +111,14 @@ export default function App() {
         <Box>{isLoading ? <Loader error={error} /> : <MovieList movies={movies} />}</Box>
 
         <Box>
-          <Summary watched={watched} />
-          <WatchedMoviesList watched={watched} />
+          {selectedId ? (
+            <MovieDetails selectedId={selectedId} onClose={onClose} />
+          ) : (
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchedMoviesList watched={watched} />
+            </>
+          )}
         </Box>
       </Main>
     </>
