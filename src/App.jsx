@@ -130,7 +130,7 @@ export default function App() {
 
         <Box>
           {selectedId ? (
-            <MovieDetails key={selectedId} KEY={KEY} selectedId={selectedId} onClose={onClose} />
+            <MovieDetails KEY={KEY} selectedId={selectedId} onClose={onClose} />
           ) : (
             <>
               <WatchedSummary watched={watched} />
