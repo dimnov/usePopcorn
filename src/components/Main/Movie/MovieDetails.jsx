@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import StarRating from "../StarRating.jsx";
 import Loader from "../Loader.jsx";
 
-function MovieDetails({ KEY, selectedId, onClose }) {
+function MovieDetails({ KEY, selectedId, onClose, onAddWatched, watched }) {
   const [movieDetails, setMovieDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState("");
+
+  const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
+
+  const watchedUserRating = watched.find((movie) => movie.imdbID === selectedId)?.userRating;
 
   const {
     Title: title,
@@ -33,6 +38,25 @@ function MovieDetails({ KEY, selectedId, onClose }) {
     getMovieDetails();
   }, [selectedId]);
 
+  function handleAdd() {
+    const newWatchedMovie = {
+      imdbID: selectedId,
+      title,
+      year,
+      poster,
+      runtime: Number(runtime.split(" ")[0]),
+      imdbRating: Number(imdbRating),
+      userRating,
+    };
+
+    onAddWatched(newWatchedMovie);
+    onClose();
+  }
+
+  function onSetRating(rating) {
+    setUserRating(rating);
+  }
+
   return (
     <div className="details">
       {isLoading ? (
@@ -59,7 +83,23 @@ function MovieDetails({ KEY, selectedId, onClose }) {
 
           <section>
             <div className="rating">
-              <StarRating size={1.5} maxRating={10} />
+              {!isWatched ? (
+                <>
+                  <StarRating size={1.5} maxRating={10} onSetRating={onSetRating} />
+                  <button
+                    disabled={userRating > 0 ? false : true}
+                    className={userRating > 0 ? "btn-add" : "btn-add disabled"}
+                    onClick={handleAdd}
+                  >
+                    + Add to list
+                  </button>
+                </>
+              ) : (
+                <p>
+                  You rated {title} with {watchedUserRating}
+                  <span>⭐</span>.
+                </p>
+              )}
             </div>
             <p>
               <em>{plot}</em>
