@@ -60,7 +60,7 @@ const tempWatchedData = [
 const KEY = "9b2da33c";
 
 export default function App() {
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
   const [watched, setWatched] = useState([]);
@@ -102,10 +102,10 @@ export default function App() {
         if (!res.ok) throw new Error("No internet connection");
 
         const data = await res.json();
-
         if (data.Response === "False") throw new Error("Movie not found");
 
         setMovies(data.Search);
+        setError("");
       } catch (error) {
         if (error.name !== "AbortError") {
           setError(error.message);
