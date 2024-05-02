@@ -34,8 +34,9 @@ function MovieDetails({ KEY, selectedId, onClose, onAddWatched, watched }) {
       setMovieDetails(data);
       setIsLoading(false);
     }
-
     getMovieDetails();
+
+    return () => {};
   }, [selectedId]);
 
   function handleAdd() {
