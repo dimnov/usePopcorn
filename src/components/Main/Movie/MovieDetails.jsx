@@ -57,6 +57,11 @@ function MovieDetails({ KEY, selectedId, onClose, onAddWatched, watched }) {
     setUserRating(rating);
   }
 
+  useEffect(() => {
+    if (!title) return;
+    document.title = `MOVIE | ${title}`;
+  }, [title]);
+
   return (
     <div className="details">
       {isLoading ? (
