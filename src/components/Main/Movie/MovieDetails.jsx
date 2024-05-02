@@ -60,6 +60,10 @@ function MovieDetails({ KEY, selectedId, onClose, onAddWatched, watched }) {
   useEffect(() => {
     if (!title) return;
     document.title = `MOVIE | ${title}`;
+
+    return () => {
+      document.title = "usePopcorn";
+    };
   }, [title]);
 
   return (
