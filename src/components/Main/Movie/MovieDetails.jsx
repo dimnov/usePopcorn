@@ -59,6 +59,20 @@ function MovieDetails({ KEY, selectedId, onClose, onAddWatched, watched }) {
   }
 
   useEffect(() => {
+    function callback(e) {
+      if (e.code === "Escape") {
+        onClose();
+      }
+    }
+
+    document.addEventListener("keydown", callback);
+
+    return () => {
+      document.removeEventListener("keydown", callback);
+    };
+  }, [onClose]);
+
+  useEffect(() => {
     if (!title) return;
     document.title = `MOVIE | ${title}`;
 
