@@ -31,7 +31,7 @@ export default function App() {
     setSelectedId(movieId === selectedId ? null : movieId);
   }
 
-  function onClose() {
+  function onMovieClose() {
     setSelectedId(null);
   }
 
@@ -113,7 +113,7 @@ export default function App() {
             <MovieDetails
               KEY={KEY}
               selectedId={selectedId}
-              onClose={onClose}
+              onMovieClose={onMovieClose}
               onAddWatched={handleAddWatched}
               watched={watched}
             />
