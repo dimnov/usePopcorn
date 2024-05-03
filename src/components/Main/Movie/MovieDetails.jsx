@@ -37,7 +37,7 @@ function MovieDetails({ KEY, selectedId, onClose, onAddWatched, watched }) {
     getMovieDetails();
 
     return () => {};
-  }, [selectedId]);
+  }, [KEY, selectedId]);
 
   function handleAdd() {
     const newWatchedMovie = {
